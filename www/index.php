@@ -12,19 +12,9 @@ require_once LIBS_DIR . '/jsutils.php';
         <title>Boilerplate Page</title>
 
         <?=IncludeFunctions::IncludeJS('vendor/rpcapi.pure', false)?>
-
-        <script type="text/javascript">
-        <?php
-            // Create the global namespace
-            JSUtils::EnsureNamespaceExists('robin');
-            // Get the app config from PHP and store it in robin.Config
-            JSUtils::CreateGlobalJSConfig('robin.Config');
-            // Initialize the API that PHP knows about in robin.Api
-            JSUtils::CreateGlobalAPI('robin.Api');
-        ?>
-        </script>
-
         <?=IncludeFunctions::IncludeJS('vendor/phaser')?>
+
+        <?=IncludeFunctions::IncludeJS('base')?>
         <?=IncludeFunctions::IncludeAllJS('src')?>
     </head>
 
@@ -42,7 +32,7 @@ require_once LIBS_DIR . '/jsutils.php';
 
         <script type="text/javascript">
             // Initialize the JS
-            robin.Main();
+            robin.Main(<?=json_encode($JS_CONFIG)?>, <?=JSUtils::CreateGlobalAPI()?>);
         </script>
     </body>
 </html>
